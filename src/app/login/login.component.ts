@@ -16,9 +16,16 @@ export class LoginComponent {
     this.auth.signInWithEmailAndPassword(this.email, this.password)
       .then((userCredential) => {
         // Aquí puedes redirigir al usuario o realizar otras acciones después de iniciar sesión.
+        console.log('Inició sesión correctamente');
+        console.log(userCredential);
+
+        // console log el correo del usuario
+        console.log(userCredential.user?.email);
       })
       .catch((error) => {
         // Manejo de errores
+        console.log('Ocurrió un error al iniciar sesión');
+        console.log(error);
       });
   }
 }

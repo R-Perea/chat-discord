@@ -1,22 +1,12 @@
 import { NgModule } from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
-  {
-    path: 'login', // Ruta para la página de inicio de sesión
-    loadChildren: () => import('./login/login.component').then(m => m.LoginComponent) 
-  },
-  {
-    path: 'chat', // Ruta para la página de chat
-    loadChildren: () => import('./chat/chat.component').then(m => m.ChatComponent)
-  },
-  {
-    path: '', // Ruta vacía
-    redirectTo: 'login', // Redirigir a la página de inicio de sesión por defecto
-    pathMatch: 'full'
-  },
-  // Puedes agregar más rutas según sea necesario
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'login', component: LoginComponent },
+  { path: 'chat', component: ChatComponent },
 ];
 
 
