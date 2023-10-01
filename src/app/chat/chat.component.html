@@ -1,1 +1,33 @@
-<p>chat works!</p>
+<div class="chat-container">
+    <h2>Chat en Tiempo Real</h2>
+
+    <!-- Área de mensajes enviados -->
+    <div class="message-area-sent">
+        <div *ngFor="let message of messages | async" class="sent-message">
+            <span>{{ message.name }}:</span>
+            <span>{{ message.text }}</span>
+          <input
+            *ngIf="message.isEditing"
+            [(ngModel)]="message.editedText"
+            (keyup.enter)="saveEditedMessage(message)"
+          />
+          <i class="material-icons-outlined edit-icon" (click)="editMessage(message)" *ngIf="!message.isEditing">edit</i>
+          <button (click)="saveEditedMessage(message)" *ngIf="message.isEditing">Guardar</button>
+        </div>
+      </div>
+    
+      
+      
+      
+
+    <!-- Formulario para enviar mensajes -->
+    <form (ngSubmit)="sendMessage(messageInput, nameInput)">
+
+        <div class="form-group">
+            <label for="messageInput">Escribe tu mensaje:</label>
+            <input type="text" id="messageInput" name="messageInput" [(ngModel)]="messageInput">
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+    
+</div>

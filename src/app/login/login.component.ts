@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,12 @@ export class LoginComponent {
   authError: any;
   email: string = ''; // Define la propiedad email e inicialízala como una cadena vacía.
   password: string = ''; // Define la propiedad password e inicialízala como una cadena vacía.
+  userEmail: string = '';
 
-  constructor(public auth: AngularFireAuth) {}
+  constructor(
+    public auth: AngularFireAuth,
+    private router:Router
+    ) {}
 
   login() {
     this.auth.signInWithEmailAndPassword(this.email, this.password)
@@ -21,6 +26,9 @@ export class LoginComponent {
 
         // console log el correo del usuario
         console.log(userCredential.user?.email);
+        this.userEmail = userCredential.user?.email || '';
+
+        this.router.navigateByUrl('chat')
       })
       .catch((error) => {
         // Manejo de errores
